@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tplatfom/controllers/providers/router_provider.dart';
 import 'package:tplatfom/presentation/common/resources/assets/app_fonts.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
 import 'package:tplatfom/presentation/common/ui/environment_banner/app_environment_banner.dart';
+import 'package:tplatfom/presentation/features/auth/auth_main.dart';
+import 'package:tplatfom/presentation/features/splash/splash_screen.dart';
 
-class TPlatformApp extends ConsumerWidget {
+class TPlatformApp extends StatelessWidget {
   const TPlatformApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.watch(routerProvider);
+  Widget build(BuildContext context) {
 
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'TPlatform',
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -34,24 +34,22 @@ class TPlatformApp extends ConsumerWidget {
           unselectedItemColor: AppColors.greyLight,
         ),
       ),
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
       debugShowCheckedModeBanner: false,
       builder: (context, widget) {
         return AppEnvironmentBanner(child: widget ?? const SizedBox());
       },
-     // home: SplashScreen(onSplashComplete: _openAuthMainPage),
+     home: SplashScreen(onSplashComplete: _openAuthMainPage),
     );
   }
-  //
-  // void _openAuthMainPage({required BuildContext context}) {
-  //   Navigator.of(context).pushReplacement(
-  //     MaterialPageRoute(
-  //       builder: (_) => const AuthMainPage(),
-  //     ),
-  //   );
-  //   _brightenStatusBar();
-  // }
+
+  void _openAuthMainPage({required BuildContext context}) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => const AuthMainPage(),
+      ),
+    );
+    _brightenStatusBar();
+  }
 
   //
   // void _openMainScreen({required BuildContext context}) {
@@ -63,13 +61,13 @@ class TPlatformApp extends ConsumerWidget {
   //   _brightenStatusBar();
   // }
   //
-  // void _brightenStatusBar() {
-  //   SystemChrome.setSystemUIOverlayStyle(
-  //     const SystemUiOverlayStyle(
-  //       statusBarIconBrightness: Brightness.light,
-  //     ),
-  //   );
-  // }
+  void _brightenStatusBar() {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+  }
 }
 
 // home: ref.watch(userDataAuthProvider).when(

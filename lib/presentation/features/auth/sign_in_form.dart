@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tplatfom/controllers/providers/login_controller_provider.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
 import 'package:tplatfom/presentation/features/auth/forgot_password_screen.dart';
 import 'package:tplatfom/presentation/features/auth/widgets/auth_form_field.dart';
 import 'package:tplatfom/presentation/features/auth/widgets/social_button.dart';
 import 'package:tplatfom/presentation/features/chart/chart_screen.dart';
-import 'package:tplatfom/repository/auth_repository.dart';
 import 'package:tplatfom/utils/extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tplatfom/utils/validators.dart';
 
-class SignInForm extends ConsumerStatefulWidget {
+class SignInForm extends StatefulWidget {
   const SignInForm({
     Key? key,
     this.prefs,
@@ -21,10 +19,10 @@ class SignInForm extends ConsumerStatefulWidget {
   final SharedPreferences? prefs;
 
   @override
-  ConsumerState<SignInForm> createState() => _SignInFormState();
+  State<SignInForm> createState() => _SignInFormState();
 }
 
-class _SignInFormState extends ConsumerState<SignInForm> {
+class _SignInFormState extends State<SignInForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -184,9 +182,8 @@ class _SignInFormState extends ConsumerState<SignInForm> {
 
     final FormState? state = formKey.currentState;
     if (state!.validate()) {
-        ref
-            .read(loginControllerProvider.notifier)
-            .login(emailController.text, passwordController.text);
-      }
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => const ChartScreen()));
+    }
   }
 }
