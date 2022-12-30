@@ -8,6 +8,13 @@ import 'package:tplatfom/themes/dark/dark_color_scheme.dart';
 import 'package:tplatfom/utils/extensions.dart';
 import 'package:tplatfom/utils/validators.dart';
 
+import 'service/auth_service.dart';
+
+enum Auth {
+  signin,
+  signup,
+}
+
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
 
@@ -26,12 +33,30 @@ class _SignUpFormState extends State<SignUpForm> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
+  final AuthService authService = AuthService();
 
   @override
   void initState() {
     initializeControllers();
     super.initState();
   }
+
+  void signUpUser() {
+    authService.signUpUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+      name: firstNameController.text,
+    );
+  }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   firstNameController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +76,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   validators: RequiredValidator.required),
               AuthFormField(
                   margin: const EdgeInsets.only(bottom: 10),
-                  title: locale!.lastName,
+                  title: locale.lastName,
                   controller: lastNameController,
                   validators: RequiredValidator.required),
               AuthFormField(
@@ -166,15 +191,16 @@ class _SignUpFormState extends State<SignUpForm> {
   validateAndSaveForm() async {
      final FormState? state = formKey.currentState;
     if (state!.validate()) {
+      signUpUser();
     /*     print('ss');
       Navigator.of(context)
           .push(MaterialPageRoute<dynamic>(builder: (_) => ChartPage())); */
-    await showDialog(
-        barrierColor: darkBarrierColor,
-        context: context,
-        builder: (BuildContext context) {
-          return const ConfirmationDialog();
-        });
+    // await showDialog(
+    //     barrierColor: darkBarrierColor,
+    //     context: context,
+    //     builder: (BuildContext context) {
+    //       return const ConfirmationDialog();
+    //     });
   }
 
 // void _showSnackBar(BuildContext context, String message) {

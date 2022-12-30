@@ -19,11 +19,8 @@ dependencies:
   package_info_plus: ^1.4.3+1
   shared_preferences: ^2.0.15
   flutter_svg: ^1.1.6
-  dio:
-  go_router: ^3.1.1
-  flutter_riverpod: ^1.0.3
-  equatable:
-  flutter_secure_storage:
+  provider: ^6.0.2
+  http:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
 import 'package:tplatfom/presentation/features/auth/forgot_password_screen.dart';
+import 'package:tplatfom/presentation/features/auth/service/auth_service.dart';
 import 'package:tplatfom/presentation/features/auth/widgets/auth_form_field.dart';
 import 'package:tplatfom/presentation/features/auth/widgets/social_button.dart';
-import 'package:tplatfom/presentation/features/chart/chart_screen.dart';
 import 'package:tplatfom/utils/extensions.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tplatfom/utils/validators.dart';
+
+enum Auth {
+  signin,
+  signup,
+}
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -29,6 +33,7 @@ class _SignInFormState extends State<SignInForm> {
   late AppLocalizations locale;
   bool isPasswordObscured = true;
   bool isRememberMe = false;
+  final AuthService authService = AuthService();
 
   @override
   void initState() {
@@ -37,12 +42,24 @@ class _SignInFormState extends State<SignInForm> {
     super.initState();
   }
 
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     locale = AppLocalizations.of(context)!;
-    // final Size size = MediaQuery.of(context).size;
-    // final isPortrait =
-    //     MediaQuery.of(context).orientation == Orientation.portrait;
 
     return SingleChildScrollView(
       child: Form(
@@ -182,8 +199,9 @@ class _SignInFormState extends State<SignInForm> {
 
     final FormState? state = formKey.currentState;
     if (state!.validate()) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const ChartScreen()));
+      signInUser();
+      // Navigator.of(context)
+      //     .pushReplacement(MaterialPageRoute(builder: (_) => const ChartScreen()));
     }
   }
 }
