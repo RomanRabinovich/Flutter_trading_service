@@ -82,18 +82,3 @@ class _TPlatformAppState extends State<TPlatformApp> {
     );
   }
 }
-
-// home: ref.watch(userDataAuthProvider).when(
-// data: (user) {
-// if (user == null) {
-// return const LandingScreen();
-// }
-// return const MobileLayoutScreen();
-// },
-// error: (err, trace) {
-// return ErrorScreen(
-// error: err.toString(),
-// );
-// },
-// loading: () => const Loader(),
-// ),

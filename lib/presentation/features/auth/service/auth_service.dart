@@ -19,6 +19,8 @@ class AuthService {
     required String email,
     required String password,
     required String name,
+    String? clientId,
+    String? clientSecret,
   }) async {
     try {
       User user = User(
@@ -29,6 +31,8 @@ class AuthService {
         address: '',
         type: '',
         token: '',
+        clientId: 'defaultClient',
+        clientSecret: "webclientSecret",
       );
       http.Response res = await http.post(
          Uri.parse('$uri/api/signup'),
@@ -37,7 +41,7 @@ class AuthService {
           'Content-Type': 'application/json',
         },
       );
-      print('boady is: ${res.body}');
+      print('body is: ${res.body}');
       httpErrorHandle(
         response: res,
         context: context,

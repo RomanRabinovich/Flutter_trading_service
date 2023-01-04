@@ -31,6 +31,14 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
+  clientId: {
+      type: String,
+      default: "clientId",
+    },
+  clientSecret: {
+        type: String,
+        default: "clientSecret",
+      },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -8,6 +8,8 @@ class User {
   final String address;
   final String type;
   final String token;
+  final String clientId;
+  final String clientSecret;
 
   User({
     required this.id,
@@ -17,6 +19,8 @@ class User {
     required this.address,
     required this.type,
     required this.token,
+    required this.clientId,
+    required this.clientSecret,
   });
 
   Map<String, dynamic> toMap() {
@@ -28,6 +32,8 @@ class User {
       'address': address,
       'type': type,
       'token': token,
+      "clientId": clientId,
+      'clientSecret': clientSecret,
     };
   }
 
@@ -40,6 +46,8 @@ class User {
       address: map['address'] ?? '',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
+      clientId: map['clientId'] ?? '',
+      clientSecret: map['clientSecret'] ?? '',
     );
   }
 
@@ -55,6 +63,8 @@ class User {
     String? address,
     String? type,
     String? token,
+    String? clientId,
+    String? clientSecret,
   }) {
     return User(
       id: id ?? this.id,
@@ -64,6 +74,8 @@ class User {
       address: address ?? this.address,
       type: type ?? this.type,
       token: token ?? this.token,
+      clientId: clientId ?? this.clientId,
+      clientSecret: clientSecret ?? this.clientSecret,
     );
   }
 }
