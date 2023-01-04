@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tplatfom/models/user.dart';
-import 'package:tplatfom/presentation/features/auth/two_factor_authentication_enabled_screen.dart';
+import 'package:tplatfom/presentation/features/chart/chart_screen.dart';
+import 'package:tplatfom/presentation/features/main/main_screen.dart';
 import 'package:tplatfom/providers/user_provider.dart';
 import 'package:tplatfom/utils/error_handling.dart';
 import 'package:tplatfom/utils/global_variables.dart';
@@ -29,7 +30,6 @@ class AuthService {
         type: '',
         token: '',
       );
-
       http.Response res = await http.post(
          Uri.parse('$uri/api/signup'),
         body: user.toJson(),
@@ -63,13 +63,14 @@ class AuthService {
       http.Response res = await http.post(
         Uri.parse('$uri/api/signin'),
         body: jsonEncode({
-          'username': email,
+          'email': email,
           'password': password,
         }),
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
       );
+      print('boady is: ${res.body}');
       httpErrorHandle(
         response: res,
         context: context,
@@ -78,7 +79,7 @@ class AuthService {
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (_) => const TwoFactorAuthenticationEnabledScreen()));
+              .pushReplacement(MaterialPageRoute(builder: (_) => const MainScreen()));
           // Navigator.pushNamedAndRemoveUntil(
           //   context,
           //   BottomBar.routeName,

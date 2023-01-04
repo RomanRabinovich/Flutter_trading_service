@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tplatfom/presentation/common/extensions/build_context_extensions.dart';
 import 'package:tplatfom/presentation/common/resources/assets/app_assets.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
 import 'package:tplatfom/presentation/common/ui/bottom_sheets/app_bottom_sheet_drag_anchor.dart';
 import 'package:tplatfom/presentation/features/chart/chart_screen.dart';
+import 'package:tplatfom/presentation/features/profile/profile_screen.dart';
+import 'package:tplatfom/providers/user_provider.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -39,11 +42,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         children: [
           [
             const ChartScreen(),
-            //const Center(child: Text("Chart screen")),
             const Center(child: Text("Watchlist screen")),
             const Center(child: Text("Orders screen")),
             const Center(child: Text("Positions screen")),
-            const Center(child: Text("Profile screen")),
+            const ProfileScreen(),
           ].elementAt(_selectedTabIndex),
           _MoreNavigationBottomSheet(
             animation: _moreSheetAnimation,
