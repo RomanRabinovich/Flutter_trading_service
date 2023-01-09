@@ -37,7 +37,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.darkThemeBackground,
+        title: Text(user.id),
+      ),
       body: Stack(
         children: [
           [

@@ -195,12 +195,12 @@ class _SignUpFormState extends State<SignUpForm> {
     /*     print('ss');
       Navigator.of(context)
           .push(MaterialPageRoute<dynamic>(builder: (_) => ChartPage())); */
-    // await showDialog(
-    //     barrierColor: darkBarrierColor,
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return const ConfirmationDialog();
-    //     });
+    await showDialog(
+        barrierColor: darkBarrierColor,
+        context: context,
+        builder: (BuildContext context) {
+          return const ConfirmationDialog();
+        });
   }
 
 // void _showSnackBar(BuildContext context, String message) {

@@ -103,7 +103,7 @@ class AuthService {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
-
+      print('1. token is ${token}');
       if (token == null) {
         prefs.setString('x-auth-token', '');
       }
@@ -115,7 +115,7 @@ class AuthService {
           'x-auth-token': token!
         },
       );
-
+      print('2. tokenRes is ${tokenRes}');
       var response = jsonDecode(tokenRes.body);
 
       if (response == true) {
@@ -126,7 +126,7 @@ class AuthService {
             'x-auth-token': token
           },
         );
-
+        print('3. response is ${response}');
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
