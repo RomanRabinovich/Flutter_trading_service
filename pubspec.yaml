@@ -21,6 +21,9 @@ dependencies:
   flutter_svg: ^1.1.6
   provider: ^6.0.2
   http:
+  fl_chart: ^0.55.1
+  font_awesome_flutter: ^10.1.0
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.10.0
@@ -65,3 +68,5 @@ flutter:
     - family: MobilePlatformIcons2
       fonts:
         - asset: assets/fonts/MobilePlatformIcons2.ttf
+
+

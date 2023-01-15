@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 
 String uri = 'http://192.168.87.128:3000';
 
+// Colors
+const kBackgroundColor = Color(0xFF1A1E28);
+const kPrimaryColor = Color(0xFF262F40);
+const kSecondaryColor = Color(0xFF3C495D);
+
+const kPrimaryTextColor = Color(0xFFEEF1F4);
+const kSecondaryTextColor = Color(0xFFB1BCCD);
+
 class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(

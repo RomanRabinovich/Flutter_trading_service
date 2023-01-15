@@ -8,10 +8,9 @@ import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
 import 'package:tplatfom/presentation/common/ui/environment_banner/app_environment_banner.dart';
 import 'package:tplatfom/presentation/features/auth/auth_main.dart';
 import 'package:tplatfom/presentation/features/auth/service/auth_service.dart';
-import 'package:tplatfom/presentation/features/chart/chart_screen.dart';
 import 'package:tplatfom/presentation/features/main/main_screen.dart';
-import 'package:tplatfom/presentation/features/splash/splash_screen.dart';
 import 'package:tplatfom/providers/user_provider.dart';
+import 'package:tplatfom/utils/global_variables.dart';
 
 class TPlatformApp extends StatefulWidget {
   const TPlatformApp({super.key});
@@ -44,7 +43,13 @@ class _TPlatformAppState extends State<TPlatformApp> {
         // Locale('uk', ''),
       ],
       theme: ThemeData(
+        scaffoldBackgroundColor: kBackgroundColor,
         fontFamily: AppFontFamilies.defaultFamily,
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: kPrimaryTextColor,
+          fontFamily: 'Onest',
+        ),
+        iconTheme: const IconThemeData(color: kPrimaryTextColor),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.greyBackground,
           selectedItemColor: AppColors.blue,

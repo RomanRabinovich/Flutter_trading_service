@@ -1,21 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tplatfom/providers/user_provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tplatfom/presentation/features/chart/components/balance_card/balance_card.dart';
+import 'package:tplatfom/presentation/features/chart/components/favorites/favorites.dart';
+import 'package:tplatfom/presentation/features/chart/components/portfolio/portfolio.dart';
+import 'package:tplatfom/utils/global_variables.dart';
 
-class ChartScreen extends StatefulWidget {
+class ChartScreen extends StatelessWidget {
   const ChartScreen({Key? key}) : super(key: key);
 
-  @override
-  State<ChartScreen> createState() => _ChartScreenState();
-}
+  Widget header() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'Welcome',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: kSecondaryTextColor,
+                ),
+              ),
+              SizedBox(height: 2),
+              Text(
+                'Jack Brown',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const CircleAvatar(
+            foregroundImage: AssetImage('assets/images/jack_brown.png'),
+            backgroundColor: kBackgroundColor,
+            radius: 30,
+          ),
+        ],
+      ),
+    );
+  }
 
-class _ChartScreenState extends State<ChartScreen> {
+  Widget bottomNavigationBar() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: const Alignment(0, -0.1),
+          colors: [
+            kBackgroundColor.withOpacity(0),
+            kBackgroundColor,
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16, bottom: 48),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            for (final icon in [
+              FontAwesomeIcons.house,
+              FontAwesomeIcons.chartColumn,
+              FontAwesomeIcons.wallet,
+              FontAwesomeIcons.gear,
+            ])
+              Icon(
+                icon,
+                color: icon == FontAwesomeIcons.house
+                    ? kPrimaryTextColor
+                    : kSecondaryColor,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserProvider>(context).user;
     return Scaffold(
-      body: Center(
-        child: Text(user.toJson(),),
+      body: Column(
+        children: [
+          Expanded(
+            child: ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                begin: const Alignment(0, 0.8),
+                end: Alignment.bottomCenter,
+                colors: [
+                  kBackgroundColor,
+                  kBackgroundColor.withOpacity(0),
+                ],
+              ).createShader(bounds),
+              blendMode: BlendMode.dstATop,
+              child: ListView(
+                padding: const EdgeInsets.only(top: 64, bottom: 24),
+                children: [
+                  header(),
+                  const SizedBox(height: 36),
+                  const BalanceCard(),
+                  const SizedBox(height: 36),
+                  const Portfolio(),
+                  const SizedBox(height: 36),
+                  const Favorites(),
+                ],
+              ),
+            ),
+          ),
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: bottomNavigationBar(),
+          // ),
+        ],
       ),
     );
   }

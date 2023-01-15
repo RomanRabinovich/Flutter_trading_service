@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
+import 'package:tplatfom/presentation/features/auth/auth_main.dart';
 import 'package:tplatfom/presentation/features/auth/two_factor_authentication_screen.dart';
-import 'package:tplatfom/presentation/features/main/main_screen.dart';
 
 class TwoFactorConfirmationDialog extends StatelessWidget {
   const TwoFactorConfirmationDialog({
@@ -70,7 +70,7 @@ class TwoFactorConfirmationDialog extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute<dynamic>(
-                            builder: (_) => const MainScreen(),
+                            builder: (_) => const AuthMainPage(),
                           ),
                         );
                       },

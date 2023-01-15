@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tplatfom/presentation/common/resources/colors/app_colors.dart';
+import 'package:tplatfom/presentation/features/auth/auth_main.dart';
 import 'package:tplatfom/presentation/features/main/main_screen.dart';
 
 class TwoFactorAuthenticationScreen extends StatelessWidget {
@@ -151,7 +152,7 @@ class TwoFactorAuthenticationScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute<dynamic>(
-                              builder: (_) => const MainScreen(),
+                              builder: (_) => const AuthMainPage(),
                             ),
                           );
                         },
@@ -170,8 +171,8 @@ class TwoFactorAuthenticationScreen extends StatelessWidget {
                               fontSize: 16, fontWeight: FontWeight.w700),
                         ),
                         onPressed: () {
-                          // Navigator.of(context).push(MaterialPageRoute<dynamic>(
-                          //     builder: (_) => const GetStartedScreen()));
+                          Navigator.of(context).push(MaterialPageRoute<dynamic>(
+                              builder: (_) => const MainScreen()));
                         },
                       ),
                     ),

@@ -15,21 +15,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final AppLocalizations? locale = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.darkThemeBackground,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('Profile'),
-            IconButton(
-              onPressed: () => ProfileServices().logOut(context),
-              icon: Icon(Icons.logout),
-            ),
-          ],
-        ),
-      ),
-      body: const Center(
-        child: Text('Profile Screen'),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('Profile'),
+          const SizedBox(
+            width: 150,
+          ),
+          IconButton(
+            onPressed: () => ProfileServices().logOut(context),
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
     );
   }
